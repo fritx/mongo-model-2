@@ -1,0 +1,11 @@
+{
+  "name": "mongo-model-2",
+  "description": "MongoDB base model layer",
+  "version": "0.0.1",
+  "repository": "https://github.com/fritx/mongo-model-2",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "mongodb": "^2.2.28",
+    "schema-validator2": "0.0.5"
+  }
+}
