@@ -1,7 +1,7 @@
 let _ = require('lodash')
 
 module.exports = B => {
-  let C = class TimeBase extends B {
+  let C = class DateBase extends B {
     // 可指定createdAt
     static async insert ({ doc, docs }) {
       let createdAt = new Date()

@@ -2,7 +2,7 @@ let { ObjectID } = require('mongodb')
 let _ = require('lodash')
 
 module.exports = B => {
-  let C = class MongoBase extends B {
+  let C = class CollBase extends B {
     static async find ({ one, filter, fields, sort, skip, limit }) {
       let coll = await this.getColl()
       let method = one ? 'findOne' : 'find'
