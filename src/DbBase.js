@@ -17,6 +17,11 @@ module.exports = B => {
       cachedDbs[key] = db
       return db
     }
+
+    static async closeDb () {
+      let db = await this.getDb()
+      return db.close()
+    }
   }
 
   // 可以在子类Base中覆盖配置

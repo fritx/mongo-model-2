@@ -58,7 +58,12 @@ module.exports = B => {
 
     static async dangerouslyDrop () {
       let coll = await this.getColl()
-      return coll.drop()
+      try {
+        // return coll.drop() // 无法捕获 需要await
+        return await coll.drop()
+      } catch (e) {
+        // ignore
+      }
     }
 
     // 暂时只支持 $set操作符

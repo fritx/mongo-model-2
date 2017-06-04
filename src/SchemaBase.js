@@ -2,7 +2,7 @@ let { validate } = require('schema-validator2')
 let _ = require('lodash')
 
 module.exports = B => {
-  let C = class SchemaBase {
+  let C = class SchemaBase extends B {
     // 验证data是否符合schema 通过则返回空 不通过则返回原因
     // partial为true表明局部验证 默认为整体验证
     static validate ({ data, partial }) {
