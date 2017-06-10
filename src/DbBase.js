@@ -7,14 +7,15 @@ let cachedDbs = {}
 module.exports = B => {
   let C = class DbBase extends B {
     static async getDb () {
-      let { port, dbName } = this.mongoConfig
-      let key = `${port}_${dbName}`
-      let db = cachedDbs[key]
+      let { url, host, port, db: dbName } = this.mongoConfig
+      url = url || `mongodb://${host}:${port}/${dbName}`
+      let db = cachedDbs[url]
       if (db) return db
 
-      let url = `mongodb://localhost:${port}/${dbName}`
-      db = await MongoClient.connect(url)
-      cachedDbs[key] = db
+      let prom = MongoClient.connect(url)
+      cachedDbs[url] = prom
+      db = await prom
+      cachedDbs[url] = db
       return db
     }
 
@@ -26,8 +27,10 @@ module.exports = B => {
 
   // 可以在子类Base中覆盖配置
   C.mongoConfig = {
+    // 或者 url: 'mongodb://localhost:27017/example',
+    host: 'localhost',
     port: 27017,
-    dbName: 'example'
+    db: 'example'
   }
   return C
 }
