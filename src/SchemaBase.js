@@ -33,11 +33,18 @@ module.exports = B => {
 
       // 检验不通过则报错 通过则返回
       let rs = this.validate({ data, partial })
-      if (rs) throw new Error(rs)
+      if (rs) throw new ValidationError(rs)
       return data
     }
   }
 
   C.schema = {}
   return C
+}
+
+class ValidationError extends Error {
+  constructor (msg) {
+    super(msg)
+    this.name = 'ValidationError'
+  }
 }
