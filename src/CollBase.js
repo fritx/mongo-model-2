@@ -77,11 +77,6 @@ module.exports = B => {
       return coll[method](filter, update)
     }
 
-    static async index (spec, options) {
-      let coll = await this.getColl()
-      return coll.ensureIndex(spec, options)
-    }
-
     static async getColl () {
       let collName = this.getCollName()
       let db = await this.getDb()
