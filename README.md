@@ -6,6 +6,20 @@ npm i -S mongo-model-2
 ```
 
 ```js
+await Order.dangerouslyDrop()
+await Order.setupIndexes()
+
+docs = await Order.find({ filter })
+doc = await Order.find({ filter, one: true })
+
+ret = await Order.insert({ docs })
+ret = await Order.insert({ doc })
+
+ret = await Order.update({ filter, set })
+ret = await Order.delete({ filter })
+```
+
+```js
 // model/Order.js
 let Product = require('./Product')
 let User = require('./User')
@@ -13,17 +27,21 @@ let B = require('./Base')
 let _ = require('lodash')
 
 let C = class Order extends B {
-  // todo
+
 }
 
-let bSchemaCopy = _.clone(B.schema)
-C.schema = _.assign(bSchemaCopy, {
+let sumProp = _.assign({}, Product.priceProp, { range: [0, null] })
+
+C.schema = _.assign({}, B.schema, {
   product: { ref: Product },
-  // price: Product.priceProp,
   amount: { type: Number, range: [1, 99], step: 1 },
-  sum: { type: Number, range: [0, null] },
+  sum: sumProp,
   user: { ref: User },
   address: { type: String }
+})
+
+C.indexes = _.assign({}, B.indexes, {
+  user_1: [{ user: 1 }]
 })
 
 module.exports = C

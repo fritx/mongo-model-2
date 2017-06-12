@@ -43,8 +43,7 @@ module.exports = B => {
     }
   }
 
-  let bSchemaCopy = _.clone(B.schema)
-  C.schema = _.assign(bSchemaCopy, {
+  C.schema = _.assign({}, B.schema, {
     createdAt: { type: Date },
     updatedAt: { type: Date, optional: true },
     deletedAt: { type: Date, optional: true }

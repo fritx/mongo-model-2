@@ -88,8 +88,7 @@ module.exports = B => {
     }
   }
 
-  let bSchemaCopy = _.clone(B.schema)
-  C.schema = _.assign(bSchemaCopy, {
+  C.schema = _.assign({}, B.schema, {
     _id: {
       type: ObjectID,
       default: () => new ObjectID()
