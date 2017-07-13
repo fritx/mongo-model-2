@@ -66,15 +66,16 @@ module.exports = B => {
       }
     }
 
-    // 暂时只支持 $set操作符
-    // $unset的validate环节 负担太重 暂不支持
-    static async update ({ many, filter, set }) {
+    // 暂时只支持validate set参数
+    // 其他$操作符的validate环节 负担太重 暂不支持
+    static async update ({ many, filter, set, mutation }) {
       let coll = await this.getColl()
-      set = this.prune({ data: set, partial: true })
-
-      let update = { $set: set }
+      if (set) {
+        set = this.prune({ data: set, partial: true })
+        mutation = { $set: set }
+      }
       let method = many ? 'updateMany' : 'updateOne'
-      return coll[method](filter, update)
+      return coll[method](filter, mutation)
     }
 
     static async getColl () {
