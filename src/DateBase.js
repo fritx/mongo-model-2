@@ -20,6 +20,11 @@ module.exports = B => {
       return super.find({ one, filter, fields, sort, skip, limit })
     }
 
+    static async count ({ filter, skip, limit }) {
+      filter = this._fixFilter(filter)
+      return super.count({ filter, skip, limit })
+    }
+
     // 可指定updatedAt
     static async update ({ many, filter, set }) {
       filter = this._fixFilter(filter)
