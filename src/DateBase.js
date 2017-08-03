@@ -26,12 +26,11 @@ module.exports = B => {
     }
 
     // 可指定updatedAt
-    static async update ({ many, filter, set }) {
+    static async update ({ many, filter, set, mutation }) {
       filter = this._fixFilter(filter)
       let updatedAt = new Date()
-      set = set || {}
       set = _.defaults({}, set, { updatedAt })
-      return super.update({ many, filter, set })
+      return super.update({ many, filter, set, mutation })
     }
 
     // 可指定deletedAt
