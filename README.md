@@ -17,6 +17,13 @@ ret = await Order.insert({ doc })
 
 ret = await Order.update({ filter, set })
 ret = await Order.delete({ filter })
+
+// pagination & relation
+let { total, docs, refs } = await Order.list({
+  filter, fields,
+  pagin: { sort, skip, limit },
+  relation: { user: { fields: ['uid', 'name'] } }
+})
 ```
 
 ```js
@@ -27,7 +34,7 @@ let B = require('./Base')
 let _ = require('lodash')
 
 let C = class Order extends B {
-
+  // ...
 }
 
 let sumProp = _.assign({}, Product.priceProp, { range: [0, null] })
@@ -54,6 +61,9 @@ let list = [
   'mongo-model-2/src/DbBase',
   'mongo-model-2/src/CollBase',
   'mongo-model-2/src/DateBase',
+  'mongo-model-2/example/UidBase',
+  'mongo-model-2/example/PaginBase',
+  'mongo-model-2/example/RelationBase',
   './AppBase'
 ].map(require)
 

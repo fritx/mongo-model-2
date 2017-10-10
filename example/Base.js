@@ -3,7 +3,9 @@ let list = [
   'mongo-model-2/src/DbBase',
   'mongo-model-2/src/CollBase',
   'mongo-model-2/src/DateBase',
-  'mongo-model-2/src/IndexBase',
+  'mongo-model-2/example/UidBase',
+  'mongo-model-2/example/PaginBase',
+  'mongo-model-2/example/RelationBase',
   './AppBase'
 ].map(require)
 
