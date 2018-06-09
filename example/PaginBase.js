@@ -21,7 +21,11 @@ module.exports = B => {
 async function koaPagin (ctx, next) {
   if (ctx.method === 'GET') {
     let { page, skip, limit } = ctx.query
-    limit = parseInt(limit) || 10
+    if (limit == 0) {
+      limit = 0 // 如果指定0 则为0 不限制数量
+    } else {
+      limit = parseInt(limit) || 10
+    }
     if ('skip' in ctx.query) {
       skip = parseInt(skip) || 0
     } else {
