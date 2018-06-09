@@ -3,6 +3,11 @@
   "description": "MongoDB base model layer",
   "version": "0.0.8",
   "repository": "https://github.com/fritx/mongo-model-2",
+  "keywords": [
+    "mongodb",
+    "model",
+    "orm"
+  ],
   "devDependencies": {
     "bluebird": "^3.5.1",
     "mongodb": "^2.2.28",
