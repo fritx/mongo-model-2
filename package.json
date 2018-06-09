@@ -1,7 +1,7 @@
 {
   "name": "mongo-model-2",
   "description": "MongoDB base model layer",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "repository": "https://github.com/fritx/mongo-model-2",
   "devDependencies": {
     "bluebird": "^3.5.1",
